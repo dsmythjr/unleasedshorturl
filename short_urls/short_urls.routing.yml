@@ -1,0 +1,14 @@
+short_urls.creation_form:
+  path: '/create-short-url'
+  defaults:
+    _form: '\Drupal\short_urls\Form\CreateShortUrl'
+    _title: 'Create a Short URL'
+  requirements:
+    _permission: 'access content'
+short_urls.info_view:
+  path: '/view/{short_url}'
+  defaults:
+    _controller: '\Drupal\short_urls\Controller\ShortUrlInfo::content'
+    _title: 'Short URL Info'
+  requirements:
+    _permission: 'access content'

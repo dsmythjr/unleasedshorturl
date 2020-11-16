@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Contains short_urls.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Routing\TrustedRedirectResponse;
+
+/**
+ * Implements hook_help().
+ */
+function short_urls_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the short_urls module.
+    case 'help.page.short_urls':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Simple module to create short URLs for a redirect') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function short_urls_theme() {
+  return [
+    'short_urls_info' => [
+      'render element' => 'children',
+      'template' => 'short-urls-info',
+      'variables' => ['data' => NULL],
+    ],
+  ];
+}
+
+/**
+ * implements hook_entity_view().
+ */
+/**
+ * Implements hook_bar().
+ */
+function short_urls_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if($entity->hasField('destination_url')) {
+    $url = $entity->get('destination_url')->getValue()[0]['uri'];
+    \Drupal::service('short_urls.short_url_helper')->addToRedirect($entity->id());
+    $response = new TrustedRedirectResponse($url);
+    $response->send();
+    return;
+  }
+}

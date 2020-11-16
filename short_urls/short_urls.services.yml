@@ -1,0 +1,4 @@
+services:
+  short_urls.short_url_helper:
+    class: Drupal\short_urls\Controller\Services\ShortUrlHelper
+    arguments: ['@entity_type.manager']

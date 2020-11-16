@@ -1,0 +1,8 @@
+<h3>Your short URL: {{ data.short_url }}</h3>
+{% if data.redirect_url %}
+  <h4>This redirects to {{ data.redirect_url }}</h4>
+  <h3>This has been redirected {{ data.redirect_count }} times</h3>
+  {% else %}
+  <h4>This short URL does not redirect anywhere!</h4>
+{% endif %}
+

@@ -1,0 +1,5 @@
+entity.short_url_entity.add_form:
+  route_name: entity.short_url_entity.add_form
+  title: 'Add Short URL'
+  appears_on:
+    - entity.short_url_entity.collection

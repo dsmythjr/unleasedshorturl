@@ -1,0 +1,5 @@
+name: 'Short URLs'
+type: module
+description: 'Simple module to create short URLs for a redirect'
+core: 8.x
+package: 'Custom'
